@@ -17,13 +17,14 @@ def criar_aluno():
     #Verificação de possíveis erros nos inputs
     while True:
         try:
-            nome = input("Qual é o Nome do Aluno \n")
-            dre = input("Qual é o DRE do Aluno \n")
+            nome = input("Insira o Nome do Aluno \n")
+            dre = input("Insira o DRE do Aluno \n")
             if nome.lower() == "sair" or dre.lower()== "sair": return None
-            if nome in inp_inv or dre in inp_inv: raise Exception
+            if nome in inp_inv or dre in inp_inv: raise TypeError
             if dre in dic_alunos.keys():raise ValueError
             break
-        except ValueError: print("Esse DRE já Existe no Sistema! Tente Novamente")
+        except ValueError: print("Esse DRE já Existe no Sistema! Tente Novamente\n")
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except Exception: print("Nome ou DRE Inválidos! Tente Novamente \n")
     #criação do objeto
     dic_alunos[dre]= Aluno(nome,dre)
@@ -37,14 +38,15 @@ def criar_prof():
     #Verificação de possíveis erros nos inputs
     while True:
         try:
-            nome = input("Qual é o Nome do Professor\n")
-            id = input("Qual é o ID do Professor\n")
+            nome = input("Insira o Nome do Professor\n")
+            id = input("Insira o ID do Professor\n")
             if nome.lower() == "sair" or id.lower()== "sair": return None
-            if nome in inp_inv or id in inp_inv: raise Exception
+            if nome in inp_inv or id in inp_inv: raise TypeError
             if id in dic_professores.keys():raise ValueError
             break
-        except ValueError: print("Esse ID já Existe no Sistema! Tente Novamente")
-        except Exception: print("Nome ou Identidade Inválidos! Tente Novamente")
+        except ValueError: print("Esse ID já Existe no Sistema! Tente Novamente\n")
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
+        except Exception: print("Nome ou Identidade Inválidos! Tente Novamente\n")
     #criação do objeto
     dic_professores[id]= Professor(nome,id)
     print(f"Professor Adicionado no Sistema! \n Nome: {nome}\n ID: {id} \n")
@@ -56,14 +58,15 @@ def criar_mat():
     #Verificação de possíveis erros nos inputs
     while True:
         try:
-            nome = input("Qual é o Nome da Materia\n")
-            codigo = input("Qual é o Código da Materia\n")
+            nome = input("Insira o Nome da Materia\n")
+            codigo = input("Insira o Código da Materia\n")
             if nome.lower() == "sair" or codigo.lower()== "sair": return None
-            if (nome in inp_inv or codigo in inp_inv): raise Exception
+            if (nome in inp_inv or codigo in inp_inv): raise TypeError
             if (codigo in dic_materias.keys()): raise ValueError
             break
-        except ValueError: print("Código da Matéria já Existente no Sistema! Tente Novamente")
-        except Exception: print("Nome ou Código Inválidos! Tente Novamente")
+        except ValueError: print("Código da Matéria já Existente no Sistema! Tente Novamente\n")
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
+        except Exception: print("Nome ou Código Inválidos! Tente Novamente\n")
     #criação do objeto
     dic_materias[codigo]= Materia(nome,codigo)
     print(f"Matéria Adicionada no Sistema! \n Nome da Matéria: {nome} \n Código da Matéria: {codigo} \n")
@@ -125,13 +128,16 @@ def criar_turma():
     #Verificação de possíveis erros nos inputs do nome e da matéria da turma
     while True:
         try:
-            nome = input("Qual é o nome da Turma\n")
-            mat = input("Qual é o código da Matéria da Turma\n")
+            nome = input("Insira o nome da Turma\n")
+            if nome in dic_turmas.keys(): raise KeyError
+            mat = input("Insira o código da Matéria da Turma\n")
             if nome.lower() == "sair" or mat.lower()== "sair": return None
-            if mat not in dic_materias.keys(): raise TypeError
-            if (nome in inp_inv) or (mat in inp_inv): raise Exception
+            if mat not in dic_materias.keys(): raise ValueError
+            if (nome in inp_inv) or (mat in inp_inv): raise TypeError
             break
-        except TypeError: print("Matéria Inexistente no Sistema. Tente Novamente\n")
+        except KeyError: print("Nome da Turma já Existente no Sistema. Tente Novamente\n")
+        except ValueError: print("Matéria Inexistente no Sistema. Tente Novamente\n")
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except Exception: print("Nome ou Matéria Inválidos. Tente Novamente\n")
     #criação do objeto
     dic_turmas[nome]= Turma(nome,dic_materias[mat])
@@ -143,12 +149,13 @@ def procura_turma():
     Encontra caso possível o objeto da turma a partir de seu nome e retorna esse objeto"""
     while True:
         try:
-            turma = input("Qual é o nome da Turma?\n")
+            turma = input("Insira o nome da Turma?\n")
             if turma.lower() == "sair": return None
-            if turma in inp_inv: raise Exception
+            if turma in inp_inv: raise TypeError
             if turma not in dic_turmas.keys(): raise ValueError
             break
         except ValueError: print("Nome Inexistente no Sistema! Tente Novamente\n")
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except Exception: print("Nome Inválido! Tente Novamente \n")
     return dic_turmas[turma]
 
@@ -160,12 +167,13 @@ def prof_turma():
     #Verificação de possíveis erros nos inputs do ID do professor
     while True:
         try:
-            prof = input("Qual é o ID do Professor?")
+            prof = input("Insira o ID do Professor\n")
             if prof.lower() == "sair": return None
-            if prof in inp_inv: raise Exception
+            if prof in inp_inv: raise TypeError
             if prof not in dic_professores.keys(): raise ValueError
             break
         except ValueError: print("ID Inexistente no Sistema! Tente Novamente\n")
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except Exception: print("ID Inválido! Tente Novamente \n")
     prof = dic_professores[prof]
     turma.add_prof(prof)
@@ -177,12 +185,13 @@ def add_aluno(turma):
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
-            dre = input("Qual é o DRE do Aluno?\n")
+            dre = input("Insira o DRE do Aluno\n")
             if dre.lower() == "sair": return None
-            if dre in inp_inv: raise Exception
+            if dre in inp_inv: raise TypeError
             if dre not in dic_alunos.keys(): raise ValueError
             break
         except ValueError: print("DRE Inexistente no Sistema! Tente Novamente\n")
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except Exception: print("DRE Inválido! Tente Novamente \n")
     return turma.add_aluno(dic_alunos[dre])
 
@@ -194,12 +203,14 @@ def add_alunos_turma():
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
-            num = input("Qual é o número de alunos a ser adicionado na Turma?\n")
+            num = input("Insira o número de alunos a ser adicionado na Turma\n")
             if num.lower() == "sair": return None
+            if num in inp_inv: raise TypeError
             num = int(num)
             if num<=0: raise ValueError
             if num> len(dic_alunos)-len(turma.alunos):raise ValueError
             break
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except ValueError: print("Número Inválido! Tente Novamente\n")
     i = 0
     while i < num: #caso ocorra erros nos inputs da adição do aluno
@@ -216,11 +227,12 @@ def remov_aluno(turma):
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
-            dre = input("Qual é o DRE do Aluno?\n")
+            dre = input("Insira o DRE do Aluno\n")
             if dre.lower() == "sair": return None
-            if dre in inp_inv: raise Exception
+            if dre in inp_inv: raise TypeError
             if dre not in dic_alunos.keys(): raise ValueError
             break
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except ValueError: print("DRE Inexistente no Sistema! Tente Novamente\n")
         except Exception: print("DRE Inválido! Tente Novamente \n")
     return turma.remov_aluno(dic_alunos[dre])
@@ -233,12 +245,14 @@ def remov_alunos_turma():
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
-            num = input("Qual é o número de alunos a serem retirados da Turma?\n")
+            num = input("Insira o número de alunos a serem retirados da Turma\n")
             if num.lower() == "sair": return None
+            if num in inp_inv: raise TypeError
             num = int(num)
             if num<=0: raise ValueError
             if num> len(turma.alunos): raise ValueError
             break
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except ValueError: print("Número Inválido! Tente Novamente\n")
     i = 0
     while i < num:#caso ocorra erros nos inputs da remoção do aluno
@@ -254,12 +268,13 @@ def nota_aluno(turma):
     Redefine a nota de um aluno da turma e retorna 0 ou 1 caso a operação tenha ocorrido sem problemas"""
     while True:
         try:
-            dre = input("Qual é o DRE do Aluno?\n")
+            dre = input("Insira o DRE do Aluno\n")
             if dre.lower() == "sair": return None
-            if dre in inp_inv: raise Exception
+            if dre in inp_inv: raise TypeError
             if dre not in dic_alunos.keys(): raise ValueError
             break
         except ValueError: print("DRE Inexistente no Sistema! Tente Novamente\n")
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except Exception: print("DRE Inválido! Tente Novamente \n")
     return turma.nota_final(dic_alunos[dre])
 
@@ -271,12 +286,14 @@ def add_notas_turma():
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
-            num = input("Qual é o Número de Alunos a Terem suas Notas Lançadas?\n")
+            num = input("Insira o Número de Alunos a Terem suas Notas Lançadas\n")
             if num.lower == "sair": return None
+            if num in inp_inv: raise TypeError
             num = int(num)
             if num<=0: raise ValueError
             if num> len(turma.alunos): raise ValueError
             break
+        except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except ValueError: print("Número Inválido! Tente Novamente\n")
     i = 0
     while i < num: #caso ocorra erros nos inputs da adição da nota
