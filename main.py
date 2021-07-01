@@ -3,7 +3,8 @@ from comandos import *
 
 
 
-dic_turma_menu = {"1":criar_turma,"2":prof_turma,"3":add_alunos_turma, "4":remov_alunos_turma,"5":add_notas_turma,"6":mostra_alunos_turma}
+dic_turma_menu = {"1":criar_turma,"2":prof_turma,"3":add_alunos_turma, "4":remov_alunos_turma,
+"5":add_notas_turma,"6":mostra_alunos_turma,"7":mostra_turmas}
 
 def turma_menu():
     """turma_menu(None)-> None
@@ -39,4 +40,14 @@ def main_menu():
 
 
 if __name__ == '__main__':
-    main_menu()
+    fluxo = Materia("fluxo","123")
+    dic_materias["123"] = fluxo
+    turma0 = Turma("sala1",fluxo)
+    dic_turmas["sala1"] = turma0
+    prof = Professor("Joao","111")
+    dic_professores["111"] = prof
+    gui = Aluno("gui","000")
+    mar = Aluno("mar","001")
+    dic_alunos["gui"] = gui
+    dic_alunos["mar"] = mar
+    turma_menu()

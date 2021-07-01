@@ -284,3 +284,18 @@ def mostra_alunos_turma():
         print(f'Nome: {aluno[0]} -- DRE: {aluno[1]} -- Nota: {aluno[2]}')
     sleep(0.5)
     print()
+
+def mostra_turmas():
+    #Caso não esteja cadastrado nenhuma Turma no sistema
+    if len(dic_turmas) == 0:
+        print("Não há Turmas Cadastradas \n")
+        return None
+    lista_turmas = []
+    for nome,turma in dic_turmas.items():
+        lista_turmas.append((nome,turma.materia.codigo,len(turma.alunos)))
+    lista_turmas.sort(key=lambda tup: tup[2], reverse=True)
+    print("Lista das Turmas:")
+    for nome,codigo,alunos in lista_turmas:
+        print(f"Nome da Turma: {nome} -- Código da Matéria: {codigo} -- Número de Alunos: {alunos}")
+    print()
+    return None
