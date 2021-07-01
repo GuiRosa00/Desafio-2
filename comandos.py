@@ -1,20 +1,26 @@
 from classes import *
 from time import sleep
 
+#dicionários reservados para cada classe para efetuação das funções
 dic_turmas={}
 dic_materias = {}
 dic_professores = {}
 dic_alunos = {}
 
-def adicionar_aluno():
+
+#Bloco de funções do Menu principal
+def criar_aluno():
+    """criar_aluno(None)-> None
+    Cria um objeto do Aluno e adiciona ele no seu respectivo dicionário (dic_alunos)"""
     nome = input("Qual é o nome do aluno \n")
     dre = input("Qual é o DRE do aluno \n")
     dic_alunos[nome]= Aluno(nome,dre)
     print(f"Professor adicionado no sistema! \n Nome: {nome}\n")
     return None
 
-
-def adicionar_prof():
+def criar_prof():
+    """criar_prof(None)-> None
+    Cria um objeto do Professor e adiciona ele no seu respectivo dicionário (dic_professores)"""
     nome = input("Qual é o nome do professor\n")
     id = input("Qual é a identidade do professor\n")
     dic_professores[nome]= Professor(nome,id)
@@ -22,7 +28,9 @@ def adicionar_prof():
     return None
           
 
-def adicionar_mat():
+def criar_mat():
+    """criar_mat(None)-> None
+    Cria um objeto da Matéria e adiciona ela no seu respectivo dicionário (dic_materias)"""
     nome = input("Qual é o nome da materia\n")
     codigo = input("Qual é o código da materia\n")
     dic_materias[nome]= Materia(nome,codigo)
@@ -30,7 +38,10 @@ def adicionar_mat():
     return None
 
 def mostra_mat():
-    if len(dic_materias) == 0:
+    """mostra_mat(None)-> None
+    Mostra todas as matérias cadastradas no sistema e oferece uma pausa de 0.5 segundos para facilitar a
+    vizualização da lista."""
+    if len(dic_materias) == 0:#Caso não esteja cadastrada nenhuma Matéria no sistema
         print("Não há Matérias Cadastradas \n")
         return None
     print("Lista de Matérias:")
@@ -42,7 +53,10 @@ def mostra_mat():
     return None
 
 def mostra_prof():
-    if len(dic_professores) == 0:
+    """mostra_prof(None)-> None
+    Mostra todas as matérias cadastradas no sistema e oferece uma pausa de 0.5 segundos para facilitar a
+    vizualização da lista."""
+    if len(dic_professores) == 0:#Caso não esteja cadastrada nenhum Professor no sistema
         print("Não há Professores Cadastradas \n")
         return None
     print("Lista de Professores:")
@@ -54,7 +68,10 @@ def mostra_prof():
     return None
 
 def mostra_alunos():
-    if len(dic_alunos) == 0:
+    """mostra_alunos(None)-> None
+    Mostra todas as matérias cadastradas no sistema e oferece uma pausa de 0.5 segundos para facilitar a
+    vizualização da lista."""
+    if len(dic_alunos) == 0:#Caso não esteja cadastrada nenhum Aluno no sistema
         print("Não há Alunos Cadastradas \n")
         return None
     print("Lista de Alunos:")
@@ -64,3 +81,5 @@ def mostra_alunos():
     print()
     sleep(0.5)
     return None
+
+#Bloco de funções do Menu das Turmas

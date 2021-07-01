@@ -6,15 +6,21 @@ from comandos import *
 dic_turma_menu = {}
 
 def turma_menu():
-    """Interface do menu das turmas do sistema"""
-    print("Menu da turma!")
+    """turma_menu(None)-> None
+    Interface do menu das turmas do sistema"""
+    print("\nMenu da turma!")
+    while True:
+        a = input("(8)Voltar ao Menu Principal")
+        if a == "8": 
+            break
     return None
 
-dic_main_menu = {"1":adicionar_mat,"2":adicionar_prof,"3":adicionar_aluno,
+dic_main_menu = {"1":criar_mat,"2":criar_prof,"3":criar_aluno,
 "4":mostra_mat,"5": mostra_prof,"6":mostra_alunos, "7":turma_menu, "8":quit}
 
 def main_menu():
-    """Interface do menu principal do sistema da Universidade"""
+    """main_menu(None)-> None
+    Interface do menu principal do sistema da Universidade"""
     print("Bem vindo ao sistema de administração da Universidade!")
     while True:
         print("Qual operação será feita?")
@@ -28,5 +34,4 @@ def main_menu():
 
 
 if __name__ == '__main__':
-    print(len({}))
     main_menu()
