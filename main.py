@@ -3,7 +3,7 @@ from comandos import *
 
 
 
-dic_turma_menu = {"1":criar_turma,"2":prof_turma,"3":add_alunos_turma, "4":remov_alunos_turma,"5":add_notas_turma,"6": mostra_alunos_turma}
+dic_turma_menu = {"1":criar_turma,"2":prof_turma,"3":add_alunos_turma, "4":remov_alunos_turma,"5":add_notas_turma,"6":mostra_alunos_turma}
 
 def turma_menu():
     """turma_menu(None)-> None
