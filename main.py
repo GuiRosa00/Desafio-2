@@ -41,14 +41,4 @@ def main_menu():
 
 
 if __name__ == '__main__':
-    fluxo = Materia("fluxo","123")
-    dic_materias["123"] = fluxo
-    turma0 = Turma("sala1",fluxo)
-    dic_turmas["sala1"] = turma0
-    prof = Professor("Joao","111")
-    dic_professores["111"] = prof
-    gui = Aluno("gui","000")
-    mar = Aluno("mar","001")
-    dic_alunos["gui"] = gui
-    dic_alunos["mar"] = mar
-    turma_menu()
+    main_menu()
