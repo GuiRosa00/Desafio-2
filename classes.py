@@ -1,8 +1,8 @@
 class Aluno:
 
-    def __init__(self, nome, dre,notas = {}):
+    def __init__(self, nome, dre):
         self.nome = nome
-        self.notas = notas
+        self.notas = []
         self.dre = dre
         return None
 
@@ -13,6 +13,13 @@ class Aluno:
         self.notas[turma.nome] = nota
         print("Nota adicionada Ao currículo do aluno")
         return None
+    
+    def remov_nota(self,turma):
+        for sala,nota in self.notas:
+            if turma.nome == sala:
+                list.remove(self.notas,(sala,nota))
+        return None
+
 
 class Professor:
 
@@ -41,29 +48,33 @@ class Turma:
 
     def alt_mat(self,materia):
         self.materia = materia
-        print(f"Matéria Alterada nessa turma para {materia.nome}")
+        print(f"Matéria Alterada na turma {self.nome} para {materia.nome}.")
         return None
 
     def add_prof(self,professor):
         self.professor = professor
-        print(f"Professor {professor.nome} Adicionado à Turma {self.nome}\n")
+        print(f"Professor {professor.nome} Adicionado à Turma {self.nome}.\n")
         return None
     
     #rascunhos
     def add_aluno(self, aluno):
-        self.alunos.append(aluno)
-        aluno.notas[self.nome] = "N/A"
-        print("Aluno Adicionado a essa turma")
-        return None
+        if aluno not in self.alunos:
+            self.alunos.append(aluno)
+            aluno.notas.append((self.nome,"N/A"))
+            aluno.notas = aluno.notas[:]
+            print(f"Aluno {aluno.nome} Adicionado à {self.nome}.\n")
+            return 1
+        print("Este aluno já está inserido na turma.\n")
+        return 0
 
     def remov_aluno(self, aluno):
         if aluno in self.alunos:
             self.alunos.remove(aluno)
-            del aluno.notas[self.nome]
-            print("Aluno removido da turma.")
-            return None
-        print("Este aluno não está inserido na turma")
-        return None
+            aluno.remov_nota(self)
+            print(f"Aluno {aluno.nome} removido da turma. \n")
+            return 1
+        print("Este aluno não está inserido na turma.\n")
+        return 0
 
     def nota_final(self, aluno):
         while True:
