@@ -134,18 +134,20 @@ def criar_turma():
     print(f"Turma Inserida no Sistema! \nNome: {nome} \nMatéria: {dic_materias[mat].nome} \nCódigo da Matéria: {mat}\n")
     return None
 
-def prof_turma():
-    """Designa um professor à sala"""
-     #Verificação de possíveis erros nos inputs do nome da turma
+def procura_turma():
     while True:
         try:
-            turma = input("Qual é o nome da Turma?")
+            turma = input("Qual é o nome da Turma?\n")
             if turma in inp_inv: raise Exception
             if turma not in dic_turmas.keys(): raise ValueError
             break
         except ValueError: print("Nome Inexistente no Sistema! Tente Novamente\n")
         except Exception: print("Nome Inválido! Tente Novamente \n")
+    return dic_turmas[turma]
 
+def prof_turma():
+    """Designa um professor à sala"""
+    turma = procura_turma()
     #Verificação de possíveis erros nos inputs do ID do professor
     while True:
         try:
@@ -156,7 +158,7 @@ def prof_turma():
         except ValueError: print("ID Inexistente no Sistema! Tente Novamente\n")
         except Exception: print("ID Inválido! Tente Novamente \n")
     prof = dic_professores[prof]
-    dic_turmas[turma].add_prof(prof)
+    turma.add_prof(prof)
     return None
 
 def add_aluno(turma):
@@ -174,16 +176,7 @@ def add_aluno(turma):
 
 def add_alunos_turma():
     """Adiciona vários alunos a uma sala"""
-     #Verificação de possíveis erros nos inputs do nome da turma
-    while True:
-        try:
-            turma = input("Qual é o nome da Turma?\n")
-            if turma in inp_inv: raise Exception
-            if turma not in dic_turmas.keys(): raise ValueError
-            break
-        except ValueError: print("Nome Inexistente no Sistema! Tente Novamente\n")
-        except Exception: print("Nome Inválido! Tente Novamente \n")
-    turma = dic_turmas[turma]
+    turma = procura_turma()
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
@@ -212,16 +205,7 @@ def remov_aluno(turma):
 
 def remov_alunos_turma():
     """Remove vários alunos de uma sala"""
-     #Verificação de possíveis erros nos inputs do nome da turma
-    while True:
-        try:
-            turma = input("Qual é o nome da Turma?\n")
-            if turma in inp_inv: raise Exception
-            if turma not in dic_turmas.keys(): raise ValueError
-            break
-        except ValueError: print("Nome Inexistente no Sistema! Tente Novamente\n")
-        except Exception: print("Nome Inválido! Tente Novamente \n")
-    turma = dic_turmas[turma]
+    turma = procura_turma()
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
@@ -233,4 +217,30 @@ def remov_alunos_turma():
     i = 0
     while i < num:
         i += remov_aluno(turma)
+    return None
+
+def nota_aluno(turma):
+    while True:
+        try:
+            dre = input("Qual é o DRE do Aluno?\n")
+            if dre in inp_inv: raise Exception
+            if dre not in dic_alunos.keys(): raise ValueError
+            break
+        except ValueError: print("DRE Inexistente no Sistema! Tente Novamente\n")
+        except Exception: print("DRE Inválido! Tente Novamente \n")
+    return turma.nota_final(dic_alunos[dre])
+
+def add_notas_turma():
+    turma = procura_turma()
+    #Verificação de possíveis erros nos inputs no número de alunos
+    while True:
+        try:
+            num = int(input("Qual é o Número de Alunos a Terem suas Notas Lançadas?\n"))
+            if num<=0: raise ValueError
+            if num> len(turma.alunos): raise ValueError
+            break
+        except ValueError: print("Número Inválido! Tente Novamente\n")
+    i = 0
+    while i < num:
+        i += nota_aluno(turma)
     return None

@@ -3,14 +3,14 @@ from comandos import *
 
 
 
-dic_turma_menu = {"1":criar_turma,"2":prof_turma,"3":add_alunos_turma, "4":remov_alunos_turma}
+dic_turma_menu = {"1":criar_turma,"2":prof_turma,"3":add_alunos_turma, "4":remov_alunos_turma,"5":add_notas_turma}
 
 def turma_menu():
     """turma_menu(None)-> None
     Interface do menu das turmas do sistema"""
-    print("\nMenu da turma!")
     while True:
-        option = input("(1)Criar uma Nova Turma \n(2)Designar um Professor a uma Turma \n(3)Adicionar Alunos a uma Turma \n(4)Remover Alunos de uma Turma \n(8)Voltar ao Menu Principal\n")
+        print("\nMenu da turma!")
+        option = input("(1)Criar uma Nova Turma \n(2)Designar um Professor a uma Turma \n(3)Adicionar Alunos a uma Turma \n(4)Remover Alunos de uma Turma \n(5)Dar a Nota Final dos Alunos de uma Turma \n(6)Mostrar todos os alunos de uma turma \n(7)Mostras todas as turmas cadastradas \n(8)Voltar ao Menu Principal\n")
         if option == "8":
             print() 
             break
@@ -26,8 +26,8 @@ dic_main_menu = {"1":criar_mat,"2":criar_prof,"3":criar_aluno,
 def main_menu():
     """main_menu(None)-> None
     Interface do menu principal do sistema da Universidade"""
-    print("Bem vindo ao sistema de administração da Universidade!")
     while True:
+        print("Bem vindo ao sistema de administração da Universidade!")
         print("Qual operação será feita?")
         option = input("(1)Adicionar uma Matéria ao Sistema \n(2)Adicionar um Professor ao Sistema \n(3)Adicionar um Aluno ao Sistema \n(4)Mostrar Todas as Matérias do Sistema \n(5)Mostrar Todos os Professores do Sistema \n(6)Mostrar Todos os Alunos do Sistema \n(7)Entrar no Menu das Turmas \n(8)Sair do Sistema\n")
         if option in dic_main_menu.keys():

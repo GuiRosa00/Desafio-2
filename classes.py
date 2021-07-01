@@ -6,12 +6,13 @@ class Aluno:
         self.dre = dre
         return None
 
-    def add_nota(self,nota,turma):
-        if turma.nome not in self.notas.keys():
-            print("Esse aluno não está cadastrado nessa turma!")
-            return None
-        self.notas[turma.nome] = nota
-        print("Nota adicionada Ao currículo do aluno")
+    def muda_nota(self,nota,turma):
+        for nome,n in self.notas:
+            if turma.nome == nome:
+                pos = self.notas.index((nome,n))
+                n = nota
+                self.notas[pos]=(nome,n)
+        print(f"Nota do aluno {self.nome} atualizada para {n}")
         return None
     
     def remov_nota(self,turma):
@@ -77,16 +78,15 @@ class Turma:
         return 0
 
     def nota_final(self, aluno):
+        if aluno not in self.alunos:
+            print("Este Aluno não Está Inserido na Turma.")
+            return 0
         while True:
             try:
-                nota = eval(input("Qual é a nota final do aluno? \n"))
-                if type(nota) != int or type(nota) != float:
-                    raise Exception
+                nota = float(input("Qual é a nota final do aluno? \n"))
+                if nota>10 or nota<0: raise Exception
                 break
             except Exception:
-                print("Essa nota não é possível de ser adicionada ao sistema.")
-        if aluno in self.alunos:
-            aluno.notas[self.nome] = nota
-            print("Nota adicionada ao sistema do Aluno.")
-            return None
-        print("Este aluno não está inserido na turma.")
+                print("Não é Possível Adicionar essa Nota no Sistema. Tente Novamente.")
+        aluno.muda_nota(nota,self)
+        return 1
