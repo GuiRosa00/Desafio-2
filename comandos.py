@@ -25,7 +25,6 @@ def criar_aluno():
             break
         except ValueError: print("Esse DRE já Existe no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
-        except Exception: print("Nome ou DRE Inválidos! Tente Novamente \n")
     #criação do objeto
     dic_alunos[dre]= Aluno(nome,dre)
     print(f"Aluno Adicionado no Sistema! \n Nome: {nome}\n DRE: {dre} \n")
@@ -46,7 +45,6 @@ def criar_prof():
             break
         except ValueError: print("Esse ID já Existe no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
-        except Exception: print("Nome ou Identidade Inválidos! Tente Novamente\n")
     #criação do objeto
     dic_professores[id]= Professor(nome,id)
     print(f"Professor Adicionado no Sistema! \n Nome: {nome}\n ID: {id} \n")
@@ -66,7 +64,6 @@ def criar_mat():
             break
         except ValueError: print("Código da Matéria já Existente no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
-        except Exception: print("Nome ou Código Inválidos! Tente Novamente\n")
     #criação do objeto
     dic_materias[codigo]= Materia(nome,codigo)
     print(f"Matéria Adicionada no Sistema! \n Nome da Matéria: {nome} \n Código da Matéria: {codigo} \n")
@@ -138,7 +135,6 @@ def criar_turma():
         except KeyError: print("Nome da Turma já Existente no Sistema. Tente Novamente\n")
         except ValueError: print("Matéria Inexistente no Sistema. Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
-        except Exception: print("Nome ou Matéria Inválidos. Tente Novamente\n")
     #criação do objeto
     dic_turmas[nome]= Turma(nome,dic_materias[mat])
     print(f"Turma Inserida no Sistema! \nNome: {nome} \nMatéria: {dic_materias[mat].nome} \nCódigo da Matéria: {mat}\n")
@@ -156,7 +152,6 @@ def procura_turma():
             break
         except ValueError: print("Nome Inexistente no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
-        except Exception: print("Nome Inválido! Tente Novamente \n")
     return dic_turmas[turma]
 
 def prof_turma():
@@ -174,7 +169,6 @@ def prof_turma():
             break
         except ValueError: print("ID Inexistente no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
-        except Exception: print("ID Inválido! Tente Novamente \n")
     prof = dic_professores[prof]
     turma.add_prof(prof)
     return None
@@ -192,7 +186,6 @@ def add_aluno(turma):
             break
         except ValueError: print("DRE Inexistente no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
-        except Exception: print("DRE Inválido! Tente Novamente \n")
     return turma.add_aluno(dic_alunos[dre])
 
 def add_alunos_turma():
@@ -234,7 +227,6 @@ def remov_aluno(turma):
             break
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
         except ValueError: print("DRE Inexistente no Sistema! Tente Novamente\n")
-        except Exception: print("DRE Inválido! Tente Novamente \n")
     return turma.remov_aluno(dic_alunos[dre])
 
 def remov_alunos_turma():
@@ -275,7 +267,6 @@ def nota_aluno(turma):
             break
         except ValueError: print("DRE Inexistente no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
-        except Exception: print("DRE Inválido! Tente Novamente \n")
     return turma.nota_final(dic_alunos[dre])
 
 def add_notas_turma():
