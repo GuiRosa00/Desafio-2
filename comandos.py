@@ -1,14 +1,14 @@
 from classes import *
 from time import sleep
 
+#inputs inválidos ao sistema como medida de preucaução
+inp_inv = ("", " ")
+
 #dicionários reservados para cada classe para efetuação das funções
 dic_turmas={}
 dic_materias = {}
 dic_professores = {}
 dic_alunos = {}
-
-#inputs inválidos ao sistema como medida de preucaução
-inp_inv = ("", " ")
 
 #Bloco de funções do Menu principal
 def criar_aluno():
@@ -124,7 +124,7 @@ def criar_turma():
     """criar_turma(None)-> None
     Cria um objeto da Turma e adiciona ela no seu respectivo dicionário (dic_turmas)"""
     
-    #Verificação de possíveis erros nos inputs
+    #Verificação de possíveis erros nos inputs do nome e da matéria da turma
     while True:
         try:
             nome = input("Qual é o nome da Turma\n")
@@ -141,6 +141,8 @@ def criar_turma():
 
 
 def prof_turma():
+
+    #Verificação de possíveis erros nos inputs do ID do professor
     while True:
         try:
             prof = input("Qual é o ID do Professor?")
@@ -149,6 +151,8 @@ def prof_turma():
             break
         except ValueError: print("Nome Inexistente no Sistema! Tente Novamente\n")
         except Exception: print("Nome Inválido! Tente Novamente \n")
+
+    #Verificação de possíveis erros nos inputs do nome da turma
     while True:
         try:
             turma = input("Qual é o nome da Turma?")
