@@ -16,7 +16,7 @@ class Aluno:
 
 class Professor:
 
-    def __init__(self,nome,id, turmas = {}):
+    def __init__(self,nome,id, turmas = []):
         self.nome = nome
         self.turmas = turmas
         self.id = id
@@ -24,7 +24,7 @@ class Professor:
 
 class Materia:
 
-    def __init__(self,nome,codigo,turmas = {}):
+    def __init__(self,nome,codigo,turmas = []):
         self.nome = nome
         self.turmas = turmas
         self.codigo = codigo
@@ -32,11 +32,11 @@ class Materia:
 
 class Turma:
 
-    def __init__(self,nome,materia = "N/A",professor = "N/A",alunos = []):
+    def __init__(self,nome,materia,professor = "N/A",alunos = []):
         self.nome = nome
         self.materia = materia
         self.professor = professor
-        self.alunos = []
+        self.alunos = alunos #lista de objetos!!!
         return None
 
     def add_mat(self,materia):
@@ -51,12 +51,14 @@ class Turma:
 
     def add_aluno(self, aluno):
         self.alunos.append(aluno)
+        aluno.notas[self.nome] = "N/A"
         print("Aluno Adicionado a essa turma")
         return None
 
     def remov_aluno(self, aluno):
         if aluno in self.alunos:
             self.alunos.remove(aluno)
+            del aluno.notas[self.nome]
             print("Aluno removido da turma.")
             return None
         print("Este aluno não está inserido na turma")
