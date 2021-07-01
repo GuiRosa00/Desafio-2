@@ -126,6 +126,7 @@ def criar_turma():
     while True:
         try:
             nome = input("Insira o nome da Turma\n")
+            nome = nome.upper()
             if nome in dic_turmas.keys(): raise KeyError
             mat = input("Insira o código da Matéria da Turma\n")
             if nome.lower() == "sair" or mat.lower()== "sair": return None
