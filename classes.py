@@ -1,78 +1,122 @@
 class Aluno:
 
-    def __init__(self, nome, dre,notas = {}):
+    def __init__(self, nome, dre):
+        """__init__(self,string,string)-> None
+        Inicializa a classe Aluno definindo nome e dre do objeto"""
         self.nome = nome
-        self.notas = notas
+        self.notas = []
         self.dre = dre
         return None
 
-    def add_nota(self,nota,turma):
-        if turma.nome not in self.notas.keys():
-            print("Esse aluno não está cadastrado nessa turma!")
-            return None
-        self.notas[turma.nome] = nota
-        print("Nota adicionada Ao currículo do aluno")
+    def muda_nota(self,nota,turma):
+        """muda_nota(self,float,object)-> None
+        Altera a nota cadastrada de um aluno em uma certa turma a partir de uma nota (float)"""
+        for nome,n in self.notas:
+            if turma.nome == nome:
+                pos = self.notas.index((nome,n))
+                n = nota
+                self.notas[pos]=(nome,n)
+                break
+        print(f"Nota do aluno {self.nome} atualizada para {n}")
+        return None
+    
+    def remov_nota(self,turma):
+        """remov_nota(self,object)-> None
+        Remove o cadastro da turma na lista de notas do Aluno"""
+        for sala,nota in self.notas:
+            if turma.nome == sala:
+                list.remove(self.notas,(sala,nota))
+                return None
+        return None
+    
+    def pega_nota(self,turma):
+        """pega_nota(self,object)-> None
+        Retorna a nota do Aluno em uma certa turma"""
+        for sala,nota in self.notas:
+            if turma.nome == sala:
+                return nota 
         return None
 
 class Professor:
-
-    def __init__(self,nome,id, turmas = {}):
+    def __init__(self,nome,id):
+        """__init__(self,string,string) -> None
+        Inicializa a classe Professor definindo nome e id do objeto"""
         self.nome = nome
-        self.turmas = turmas
         self.id = id
         return None
 
 class Materia:
 
-    def __init__(self,nome,codigo,turmas = {}):
+    def __init__(self,nome,codigo):
+        """__init__(self,string,string) -> None
+        Inicializa a classe Materia definindo nome e codigo do objeto"""
         self.nome = nome
-        self.turmas = turmas
         self.codigo = codigo
         return None
 
 class Turma:
 
-    def __init__(self,nome,materia = "N/A",professor = "N/A",alunos = []):
-        self.nome = nome
-        self.materia = materia
-        self.professor = professor
-        self.alunos = []
+    def __init__(self,nome,materia,professor = "N/A"):
+        """__init__(self,string,object,object) -> None
+        Inicializa a classe Turma definindo nome, materia e professor (é possível omitir esse dado) do objeto"""
+        self.nome = nome #string
+        self.materia = materia #objeto
+        self.professor = professor #objeto
+        self.alunos = [] #lista de objetos!!!
         return None
 
-    def add_mat(self,materia):
+    def alt_mat(self,materia):
+        """alt_mat(self,object)-> None
+        Altera a Materia cadastrada em uma Turma para uma nova materia"""
         self.materia = materia
-        print("Matéria Adicionada a essa turma")
+        print(f"Matéria Alterada na turma {self.nome} para {materia.nome}.")
         return None
 
     def add_prof(self,professor):
+        """add_prof(self,object)-> None
+        Adiciona um Professor em uma Turma"""
         self.professor = professor
-        print("Professor Adicionado a essa turma")
+        print(f"Professor {professor.nome} Adicionado à Turma {self.nome}.\n")
         return None
 
     def add_aluno(self, aluno):
-        self.alunos.append(aluno)
-        print("Aluno Adicionado a essa turma")
-        return None
+        """add_aluno(self,object)->int
+        Caso o aluno não esteja na turma, a função adiciona o aluno na lista self.alunos, adiciona os dados da turma
+        na classe do aluno e retorna um valor inteiro 1. Caso o aluno exista na Turma, a função retorna 0"""
+        if aluno not in self.alunos:
+            self.alunos.append(aluno)
+            aluno.notas.append((self.nome,"N/A"))
+            aluno.notas = aluno.notas[:]
+            print(f"Aluno {aluno.nome} Adicionado à {self.nome}.\n")
+            return 1
+        print("Este aluno já está inserido na turma.\n")
+        return 0
 
     def remov_aluno(self, aluno):
+        """remov_aluno(self,object)->int
+        Caso o aluno esteja na turma, a função retira o aluno na lista self.alunos, retira os dados da turma
+        na classe do aluno e retorna um valor inteiro 1. Caso o aluno não esteja na Turma, a função retorna 0"""
         if aluno in self.alunos:
             self.alunos.remove(aluno)
-            print("Aluno removido da turma.")
-            return None
-        print("Este aluno não está inserido na turma")
-        return None
+            aluno.remov_nota(self)
+            print(f"Aluno {aluno.nome} removido da turma. \n")
+            return 1
+        print("Este aluno não está inserido na turma.\n")
+        return 0
 
     def nota_final(self, aluno):
+        """nota_final(self,object)->int
+        Caso o aluno esteja na turma, a função pede um valor real para a nota, adiciona a nota na classe do aluno
+        caso seja possível e retorna um valor inteiro 1. Caso o aluno não esteja na Turma, a função retorna 0"""
+        if aluno not in self.alunos:
+            print("Este Aluno não Está Inserido na Turma.")
+            return 0
         while True:
             try:
-                nota = eval(input("Qual é a nota final do aluno? \n"))
-                if type(nota) != int or type(nota) != float:
-                    raise Exception
+                nota = float(input("Qual é a nota final do aluno? \n"))
+                if nota>10 or nota<0: raise Exception
                 break
             except Exception:
-                print("Essa nota não é possível de ser adicionada ao sistema.")
-        if aluno in self.alunos:
-            aluno.notas[self.nome] = nota
-            print("Nota adicionada ao sistema do Aluno.")
-            return None
-        print("Este aluno não está inserido na turma.")
+                print("Não é Possível Adicionar essa Nota no Sistema. Tente Novamente.")
+        aluno.muda_nota(nota,self)
+        return 1
