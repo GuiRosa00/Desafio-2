@@ -12,6 +12,7 @@ class Aluno:
                 pos = self.notas.index((nome,n))
                 n = nota
                 self.notas[pos]=(nome,n)
+                break
         print(f"Nota do aluno {self.nome} atualizada para {n}")
         return None
     
@@ -19,8 +20,14 @@ class Aluno:
         for sala,nota in self.notas:
             if turma.nome == sala:
                 list.remove(self.notas,(sala,nota))
+                return None
         return None
-
+    
+    def pega_nota(self,turma):
+        for sala,nota in self.notas:
+            if turma.nome == sala:
+                return nota 
+        return None
 
 class Professor:
 
@@ -40,11 +47,11 @@ class Materia:
 
 class Turma:
 
-    def __init__(self,nome,materia,professor = "N/A",alunos = []):
+    def __init__(self,nome,materia,professor = "N/A"):
         self.nome = nome #string
         self.materia = materia #objeto
         self.professor = professor #objeto
-        self.alunos = alunos #lista de objetos!!!
+        self.alunos = [] #lista de objetos!!!
         return None
 
     def alt_mat(self,materia):

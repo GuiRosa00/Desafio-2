@@ -244,3 +244,15 @@ def add_notas_turma():
     while i < num:
         i += nota_aluno(turma)
     return None
+
+def mostra_alunos_turma():
+    turma = procura_turma()
+    lista_nome = []
+    for aluno in turma.alunos:
+        lista_nome.append((aluno.nome,aluno.dre, aluno.pega_nota(turma)))
+    lista_nome.sort(key=lambda tup: tup[0])
+    print(f"Lista de Alunos da turma {turma.nome}:")
+    for aluno in lista_nome:
+        print(f'Nome: {aluno[0]} -- DRE: {aluno[1]} -- Nota: {aluno[2]}')
+    sleep(0.5)
+    print()
