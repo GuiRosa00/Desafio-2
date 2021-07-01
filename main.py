@@ -2,7 +2,7 @@ from classes import *
 from comandos import *
 
 
-
+#opções presentes no menu da turma
 dic_turma_menu = {"1":criar_turma,"2":prof_turma,"3":add_alunos_turma, "4":remov_alunos_turma,
 "5":add_notas_turma,"6":mostra_alunos_turma,"7":mostra_turmas}
 
@@ -21,6 +21,7 @@ def turma_menu():
             print("Este comando é inválido. Tente Novamente.")
     return None
 
+#opções presentes no menu principal
 dic_main_menu = {"1":criar_mat,"2":criar_prof,"3":criar_aluno,
 "4":mostra_mat,"5": mostra_prof,"6":mostra_alunos, "7":turma_menu, "8":quit}
 

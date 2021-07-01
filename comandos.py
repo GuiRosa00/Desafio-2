@@ -139,6 +139,8 @@ def criar_turma():
     return None
 
 def procura_turma():
+    """procura_turma(None)-> class
+    Encontra caso possível o objeto da turma a partir de seu nome e retorna esse objeto"""
     while True:
         try:
             turma = input("Qual é o nome da Turma?\n")
@@ -151,7 +153,8 @@ def procura_turma():
     return dic_turmas[turma]
 
 def prof_turma():
-    """Designa um professor à sala"""
+    """prof_turma(None)-> None
+    Designa um professor à turma"""
     turma = procura_turma()
     if turma == None: return None
     #Verificação de possíveis erros nos inputs do ID do professor
@@ -169,7 +172,8 @@ def prof_turma():
     return None
 
 def add_aluno(turma):
-    """Adiciona 1 único aluno a uma sala."""
+    """add_aluno(object)->int
+    Adiciona 1 único aluno a uma sala e retorna valores 0 ou 1 caso a adição seja feita do modo certo"""
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
@@ -183,7 +187,8 @@ def add_aluno(turma):
     return turma.add_aluno(dic_alunos[dre])
 
 def add_alunos_turma():
-    """Adiciona vários alunos a uma sala"""
+    """add_alunos_turma(None)-> None
+    Adiciona vários alunos a uma turma"""
     turma = procura_turma()
     if turma == None: return None
     #Verificação de possíveis erros nos inputs no número de alunos
@@ -197,12 +202,17 @@ def add_alunos_turma():
             break
         except ValueError: print("Número Inválido! Tente Novamente\n")
     i = 0
-    while i < num:
-        i += add_aluno(turma)
+    while i < num: #caso ocorra erros nos inputs da adição do aluno
+        try:
+            i += add_aluno(turma)
+        #caso o comando sair seja ativado no código
+        except Exception:
+            return None
     return None
 
 def remov_aluno(turma):
-    """Remove 1 único aluno de uma sala."""
+    """remov_aluno(object)->int
+    Remove 1 único aluno a uma sala e retorna valores 0 ou 1 caso a adição seja feita do modo certo"""
     #Verificação de possíveis erros nos inputs no número de alunos
     while True:
         try:
@@ -216,7 +226,8 @@ def remov_aluno(turma):
     return turma.remov_aluno(dic_alunos[dre])
 
 def remov_alunos_turma():
-    """Remove vários alunos de uma sala"""
+    """remov_alunos_turma(None)-> None
+    Remove vários alunos de uma sala"""
     turma = procura_turma()
     if turma == None: return None
     #Verificação de possíveis erros nos inputs no número de alunos
@@ -230,7 +241,7 @@ def remov_alunos_turma():
             break
         except ValueError: print("Número Inválido! Tente Novamente\n")
     i = 0
-    while i < num:
+    while i < num:#caso ocorra erros nos inputs da remoção do aluno
         try:
             i += remov_aluno(turma)
         #caso o comando sair seja ativado no código
@@ -239,6 +250,8 @@ def remov_alunos_turma():
     return None
 
 def nota_aluno(turma):
+    """nota_aluno(object)-> int
+    Redefine a nota de um aluno da turma e retorna 0 ou 1 caso a operação tenha ocorrido sem problemas"""
     while True:
         try:
             dre = input("Qual é o DRE do Aluno?\n")
@@ -251,6 +264,8 @@ def nota_aluno(turma):
     return turma.nota_final(dic_alunos[dre])
 
 def add_notas_turma():
+    """add_notas_turma(None)-> None
+    Adiciona no sistema da turma a nota de vários alunos nessa turma"""
     turma = procura_turma()
     if turma == None: return None
     #Verificação de possíveis erros nos inputs no número de alunos
@@ -264,7 +279,7 @@ def add_notas_turma():
             break
         except ValueError: print("Número Inválido! Tente Novamente\n")
     i = 0
-    while i < num:
+    while i < num: #caso ocorra erros nos inputs da adição da nota
         try:
             i += nota_aluno(turma)
         #caso o comando sair seja ativado no código
@@ -273,6 +288,8 @@ def add_notas_turma():
     return None
 
 def mostra_alunos_turma():
+    """mostra_alunos_turma(None)->None
+    Mostra todos os alunos de uma turma em ordem alfabética"""
     turma = procura_turma()
     if turma == None: return None
     lista_nome = []
@@ -284,8 +301,11 @@ def mostra_alunos_turma():
         print(f'Nome: {aluno[0]} -- DRE: {aluno[1]} -- Nota: {aluno[2]}')
     sleep(0.5)
     print()
+    return None
 
 def mostra_turmas():
+    """mostra_turmas(None)-> None
+    Mostra todas as turmas cadastradas em ordem decrescente do número de alunos inseridos em cada turma"""
     #Caso não esteja cadastrado nenhuma Turma no sistema
     if len(dic_turmas) == 0:
         print("Não há Turmas Cadastradas \n")
