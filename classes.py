@@ -33,22 +33,23 @@ class Materia:
 class Turma:
 
     def __init__(self,nome,materia,professor = "N/A",alunos = []):
-        self.nome = nome
-        self.materia = materia
-        self.professor = professor
+        self.nome = nome #string
+        self.materia = materia #objeto
+        self.professor = professor #objeto
         self.alunos = alunos #lista de objetos!!!
         return None
 
-    def add_mat(self,materia):
+    def alt_mat(self,materia):
         self.materia = materia
-        print("Matéria Adicionada a essa turma")
+        print(f"Matéria Alterada nessa turma para {materia.nome}")
         return None
 
     def add_prof(self,professor):
         self.professor = professor
-        print("Professor Adicionado a essa turma")
+        print(f"Professor {professor.nome} Adicionado à Turma {self.nome}\n")
         return None
-
+    
+    #rascunhos
     def add_aluno(self, aluno):
         self.alunos.append(aluno)
         aluno.notas[self.nome] = "N/A"

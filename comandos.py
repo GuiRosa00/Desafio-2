@@ -23,10 +23,9 @@ def criar_aluno():
             if nome in inp_inv or dre in inp_inv: raise Exception
             if dre in dic_alunos.keys():raise ValueError
             break
-        except ValueError:
-            print("Esse DRE já Existe no Sistema! Tente Novamente")
-        except Exception:
-            print("Nome ou DRE Inválidos! Tente Novamente \n")
+        except ValueError: print("Esse DRE já Existe no Sistema! Tente Novamente")
+        except Exception: print("Nome ou DRE Inválidos! Tente Novamente \n")
+    #criação do objeto
     dic_alunos[dre]= Aluno(nome,dre)
     print(f"Aluno Adicionado no Sistema! \n Nome: {nome}\n DRE: {dre} \n")
     return None
@@ -43,10 +42,9 @@ def criar_prof():
             if nome in inp_inv or id in inp_inv: raise Exception
             if id in dic_professores.keys():raise ValueError
             break
-        except ValueError:
-            print("Esse ID já Existe no Sistema! Tente Novamente")
-        except Exception:
-            print("Nome ou Identidade Inválidos! Tente Novamente")
+        except ValueError: print("Esse ID já Existe no Sistema! Tente Novamente")
+        except Exception: print("Nome ou Identidade Inválidos! Tente Novamente")
+    #criação do objeto
     dic_professores[id]= Professor(nome,id)
     print(f"Professor Adicionado no Sistema! \n Nome: {nome}\n ID: {id} \n")
     return None
@@ -63,10 +61,9 @@ def criar_mat():
             if (nome in inp_inv or codigo in inp_inv): raise Exception
             if (codigo in dic_materias.keys()): raise ValueError
             break
-        except ValueError:
-            print("Código da Matéria já Existente no Sistema! Tente Novamente")
-        except Exception:
-            print("Nome ou Código Inválidos! Tente Novamente")
+        except ValueError: print("Código da Matéria já Existente no Sistema! Tente Novamente")
+        except Exception: print("Nome ou Código Inválidos! Tente Novamente")
+    #criação do objeto
     dic_materias[codigo]= Materia(nome,codigo)
     print(f"Matéria Adicionada no Sistema! \n Nome da Matéria: {nome} \n Código da Matéria: {codigo} \n")
     return None
@@ -123,7 +120,7 @@ def mostra_alunos():
     return None
 
 #Bloco de funções do Menu das Turmas
-def criar_turma(): #função incompleta!!!!
+def criar_turma():
     """criar_turma(None)-> None
     Cria um objeto da Turma e adiciona ela no seu respectivo dicionário (dic_turmas)"""
     
@@ -135,10 +132,31 @@ def criar_turma(): #função incompleta!!!!
             if mat not in dic_materias.keys(): raise TypeError
             if (nome in inp_inv) or (mat in inp_inv): raise Exception
             break
-        except TypeError: print("Matéria Inexistente no Sistema. Tente Novamente")
-        except Exception: print("Nome ou Matéria Inválidos. Tente Novamente")
-    
-    #criação da turma e adição dos alunos
-    turma = Turma(nome,mat)
-    dic_turmas[nome]= turma
+        except TypeError: print("Matéria Inexistente no Sistema. Tente Novamente\n")
+        except Exception: print("Nome ou Matéria Inválidos. Tente Novamente\n")
+    #criação do objeto
+    dic_turmas[nome]= Turma(nome,mat)
+    print(f"Turma Inserida no Sistema! \nNome: {nome} \nMatéria: {dic_materias[mat].nome} \nCódigo da Matéria: {mat}\n")
+    return None
+
+
+def prof_turma():
+    while True:
+        try:
+            prof = input("Qual é o ID do Professor?")
+            if prof in inp_inv: raise Exception
+            if prof not in dic_professores.keys(): raise ValueError
+            break
+        except ValueError: print("Nome Inexistente no Sistema! Tente Novamente\n")
+        except Exception: print("Nome Inválido! Tente Novamente \n")
+    while True:
+        try:
+            turma = input("Qual é o nome da Turma?")
+            if turma in inp_inv: raise Exception
+            if turma not in dic_turmas.keys(): raise ValueError
+            break
+        except ValueError: print("Nome Inexistente no Sistema! Tente Novamente\n")
+        except Exception: print("Nome Inválido! Tente Novamente \n")
+    prof = dic_professores[prof]
+    dic_turmas[turma].add_prof(prof)
     return None
