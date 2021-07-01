@@ -1,4 +1,6 @@
 from classes import *
+from time import sleep
+
 dic_turmas={}
 dic_materias = {}
 dic_professores = {}
@@ -28,22 +30,37 @@ def adicionar_mat():
     return None
 
 def mostra_mat():
+    if len(dic_materias) == 0:
+        print("Não há Matérias Cadastradas \n")
+        return None
     print("Lista de Matérias:")
     for nome,materia in dic_materias.items():
         codigo = materia.codigo
-        print(f'{nome} -- {codigo}')
+        print(f'Matéria:{nome} -- Código:{codigo}')
+    print()
+    sleep(0.5)
     return None
 
 def mostra_prof():
+    if len(dic_professores) == 0:
+        print("Não há Professores Cadastradas \n")
+        return None
     print("Lista de Professores:")
     for nome, prof in dic_professores.items():
         id = prof.id
-        print(f'{nome} -- {id}')
+        print(f'Nome:{nome} -- Identidade:{id}')
+    print()
+    sleep(0.5)
     return None
 
 def mostra_alunos():
+    if len(dic_alunos) == 0:
+        print("Não há Alunos Cadastradas \n")
+        return None
     print("Lista de Alunos:")
     for nome, aluno in dic_professores.items():
         dre = aluno.dre
-        print(f'{nome} -- {dre}')
+        print(f'Nome:{nome} -- DRE:{dre}')
+    print()
+    sleep(0.5)
     return None
