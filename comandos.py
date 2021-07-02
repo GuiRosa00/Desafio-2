@@ -21,10 +21,14 @@ def criar_aluno():
             dre = input("Insira o DRE do Aluno \n")
             if nome.lower() == "sair" or dre.lower()== "sair": return None
             if nome in inp_inv or dre in inp_inv: raise TypeError
-            if dre in dic_alunos.keys():raise ValueError
+            if dre in dic_alunos.keys():raise KeyError
+            if not(str.isalpha(nome)):raise ValueError
+            if not(str.isdecimal(dre)):raise NameError
             break
-        except ValueError: print("Esse DRE já Existe no Sistema! Tente Novamente\n")
+        except KeyError: print("Esse DRE já Existe no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
+        except ValueError: print("Nome com Caractér Inválido (utilizado números)! Tente Novamente\n")
+        except NameError: print("DRE com Caractér Inválido (utilizado letras)! Tente Novamente\n")
     #criação do objeto
     dic_alunos[dre]= Aluno(nome,dre)
     print(f"Aluno Adicionado no Sistema! \n Nome: {nome}\n DRE: {dre} \n")
@@ -41,10 +45,14 @@ def criar_prof():
             id = input("Insira o ID do Professor\n")
             if nome.lower() == "sair" or id.lower()== "sair": return None
             if nome in inp_inv or id in inp_inv: raise TypeError
-            if id in dic_professores.keys():raise ValueError
+            if id in dic_professores.keys():raise KeyError
+            if not(str.isalpha(nome)):raise ValueError
+            if not(str.isdecimal(id)):raise NameError
             break
-        except ValueError: print("Esse ID já Existe no Sistema! Tente Novamente\n")
+        except KeyError: print("Esse ID já Existe no Sistema! Tente Novamente\n")
         except TypeError: print("Input Falso Detectado (input vazio)! Tente Novamente\n")
+        except ValueError: print("Nome com Caractér Inválido (utilizado números)! Tente Novamente\n")
+        except NameError: print("ID com Caractér Inválido (utilizado letras)! Tente Novamente\n")
     #criação do objeto
     dic_professores[id]= Professor(nome,id)
     print(f"Professor Adicionado no Sistema! \n Nome: {nome}\n ID: {id} \n")
